@@ -29,6 +29,9 @@ public class Tester {
     @Column(name = "image", nullable = true)
     private String image;
 
+    @Column(name = "category", nullable = false)
+    private String category;
+
     @Column(name = "views", nullable = false, columnDefinition = "bigint default 0")
     private Long views=0L;
 
@@ -56,6 +59,7 @@ public class Tester {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.image = requestDto.getImage();
+        this.category = requestDto.getCategory();
         this.questions = new ArrayList<>();
     }
     public void setUser(User user)
