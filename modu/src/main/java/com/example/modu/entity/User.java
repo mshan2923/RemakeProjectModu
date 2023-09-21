@@ -6,8 +6,12 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -15,7 +19,7 @@ import java.util.List;
 //@Setter
 @Table(name = "user")
 @NoArgsConstructor
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -48,5 +52,30 @@ public class User {
     {
         this.tests.add(tester);
         return this.tests;
+    }
+
+    @Override//권한 반환
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("user"));
+    }
+
+    @Override//계정 만료 여부
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override//계정 잠금 여부
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override//패스워드 만료 여부
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override//계정 사용 가능 여부
+    public boolean isEnabled() {
+        return true;
     }
 }

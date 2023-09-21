@@ -70,7 +70,7 @@ public class TesterService {
     public User getCurrentUser()
     {
         if (userRepository.count() <= 0)
-            throw new NoSuchElementException("유저가 없어요!");
+            throw new NoSuchElementException("유저가 없어요! - 지금은 맨 처음 유저를 씀");
 
         return userRepository.findAll().stream().findFirst().get();
     }
