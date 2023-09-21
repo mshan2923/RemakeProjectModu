@@ -14,6 +14,9 @@ import com.example.modu.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,11 +70,32 @@ public class TesterService {
                 .map(TestsResponseDto::new)
                 .collect(Collectors.toList()));
     }
-    public User getCurrentUser()
-    {
-        if (userRepository.count() <= 0)
-            throw new NoSuchElementException("유저가 없어요! - 지금은 맨 처음 유저를 씀");
 
-        return userRepository.findAll().stream().findFirst().get();
+    // 현재 로그인한 회원 정보 가져오기
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getPrincipal() instanceof UserDetails) { //---------------
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String currentUsername = userDetails.getUsername();
+            return userRepository.findByUsername(currentUsername).orElseThrow(
+                    () -> new IllegalArgumentException("인증된 사용자를 찾을 수 없습니다.")
+            );
+        } else {
+            throw new IllegalStateException("올바른 인증 정보가 아닙니다.");
+        }
+    }
+
+    // 본인이 작성한 테스트인지 확인
+    private void validateUserAuthority(Tester tester, User currentUser) {
+        if (tester.getUser().equals(currentUser)) {
+            throw new IllegalArgumentException("본인의 테스트만 수정/삭제 할 수 있습니다.");
+        }
+    }
+
+    // testId로 해당 test 가져오기
+    private Tester findTesterById(Long testId) {
+        return testerRepository.findById(testId).orElseThrow(
+                () -> new IllegalArgumentException("해당 테스트를 찾을 수 없습니다.")
+        );
     }
 }
