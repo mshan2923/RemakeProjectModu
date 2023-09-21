@@ -1,9 +1,6 @@
 package com.example.modu.service;
 
-import com.example.modu.dto.TestElement.ChoiceDto;
-import com.example.modu.dto.TestElement.QuestionDto;
-import com.example.modu.dto.TestElement.TestMakeRequestDto;
-import com.example.modu.dto.TestElement.TestsResponseDto;
+import com.example.modu.dto.TestElement.*;
 import com.example.modu.dto.user.StatusResponseDto;
 import com.example.modu.entity.TestElement.Choice;
 import com.example.modu.entity.TestElement.Question;
@@ -72,6 +69,12 @@ public class TesterService {
         Pageable pageable = PageRequest.of(page, size);
         Page<Tester> testers = testerRepository.findAll(pageable);
         return testers.stream().map(TestsResponseDto::new).collect(Collectors.toList());
+    }
+
+    // 테스트 상세 조회
+    public TestDetailResponseDto getTestById(Long testId) {
+        Tester tester = findTesterById(testId);
+        return new TestDetailResponseDto(tester);
     }
 
     // 현재 로그인한 회원 정보 가져오기

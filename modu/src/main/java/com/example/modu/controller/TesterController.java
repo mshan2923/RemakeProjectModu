@@ -1,5 +1,6 @@
 package com.example.modu.controller;
 
+import com.example.modu.dto.TestElement.TestDetailResponseDto;
 import com.example.modu.dto.TestElement.TestMakeRequestDto;
 import com.example.modu.dto.TestElement.TestsResponseDto;
 import com.example.modu.dto.user.StatusResponseDto;
@@ -40,5 +41,11 @@ public class TesterController {
     public List<TestsResponseDto> getAllTests(@RequestParam(defaultValue = "0") int page,
                                               @RequestParam(defaultValue = "10") int size) {
         return testerService.getAllTests(page, size);
+    }
+
+    // 테스트 상세 조회
+    @GetMapping("/test/{testId}")
+    public TestDetailResponseDto getTestById(@PathVariable Long testId) {
+        return testerService.getTestById(testId);
     }
 }
