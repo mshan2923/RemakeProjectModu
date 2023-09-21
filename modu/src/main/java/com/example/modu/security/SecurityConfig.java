@@ -1,5 +1,7 @@
 package com.example.modu.security;
 
+import com.example.modu.Handler.AuthFailureHandler;
+import com.example.modu.Handler.AuthSuccessHandler;
 import com.example.modu.service.UserDetailService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,20 +64,8 @@ public class SecurityConfig {
                             .usernameParameter("username")
                             .passwordParameter("password")
                             .loginProcessingUrl("/api/user/login")
-                            .successHandler(new AuthenticationSuccessHandler() {
-                                @Override
-                                public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                                    log.info("login Success");
-                                    response.sendError(200, "로그인 성공 - 메세지는 에러메세지로 보냄");
-                                }
-                            })
-                            .failureHandler(new AuthenticationFailureHandler() {
-                                @Override
-                                public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                                    log.info("login Fail");
-                                    response.sendError(400, "로그인 실패 - 메세지는 에러메세지로 보냄");
-                                }
-                            })
+                            .successHandler(new AuthSuccessHandler())
+                            .failureHandler(new AuthFailureHandler())
 
             );
         }catch (Exception e)
