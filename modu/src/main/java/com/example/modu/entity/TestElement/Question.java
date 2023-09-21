@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "question")
 @NoArgsConstructor
 public class Question {
@@ -38,5 +37,9 @@ public class Question {
         this.title = dto.getTitle();
         this.image = dto.getImage();
         this.choices = new ArrayList<>();
+    }
+
+    public void setTester(Tester tester) {
+        this.tester = tester;
     }
 }

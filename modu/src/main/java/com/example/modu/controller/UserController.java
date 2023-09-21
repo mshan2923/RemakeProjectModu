@@ -1,7 +1,9 @@
 package com.example.modu.controller;
 
+import com.example.modu.dto.user.LoginRequestDto;
 import com.example.modu.dto.user.SignupRequestDto;
 import com.example.modu.dto.user.StatusResponseDto;
+import com.example.modu.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,7 @@ public class UserController {
 
     //private final JwtUtil jwtUtil;
     //private final JwtService jwtService;
-    //private final UserService userService;
+    private final UserService userService;
 
     @GetMapping("/loginForm")
     private String loginPage()
@@ -31,8 +33,11 @@ public class UserController {
     }
     @PostMapping("/signup")
     private ResponseEntity<StatusResponseDto> signup(@RequestBody SignupRequestDto signup) {
-        //return userService.signup(signup);
-        return ResponseEntity.ok(null);
+        return userService.signup(signup);
+    }
+    @PostMapping("/login")
+    private ResponseEntity<StatusResponseDto> login(@RequestBody LoginRequestDto login) {
+        return userService.login(login);
     }
 
     //======= 전부 한줄로 Service 에서 전부 처리 + if문 도

@@ -3,6 +3,7 @@ package com.example.modu.controller;
 import com.example.modu.dto.TestElement.TestMakeRequestDto;
 import com.example.modu.dto.TestElement.TestsResponseDto;
 import com.example.modu.dto.user.StatusResponseDto;
+import com.example.modu.service.TesterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,28 +20,24 @@ import java.util.List;
 @RequestMapping("/api")
 public class TesterController {
 
-    //private final TesterService testerService;
+    private final TesterService testerService;
 
     // 테스트 만들기 폼 페이지
     @GetMapping("/test/testMakeForm")
-    public ModelAndView testMakeForm(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("testMakeForm");
-        return modelAndView;
+    public String testMakeForm(){
+        return "testMakeForm";
     }
 
 
     // 테스트 만들기
     @PostMapping("/test/testMakeForm")
     public ResponseEntity<StatusResponseDto> createTester(@RequestBody TestMakeRequestDto requestDto){
-            //return testerService.createTester(requestDto);
-        return ResponseEntity.ok(null);
+        return testerService.createTester(requestDto);
     }
 
     // 테스트 조회
     @GetMapping("/tests")
     public ResponseEntity<List<TestsResponseDto>> getAllTests() {
-        //return ResponseEntity.ok(testerService.getAllTests());
-        return ResponseEntity.ok(null);
+        return testerService.getAllTests();
     }
 }

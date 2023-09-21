@@ -13,7 +13,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "tester")
 @NoArgsConstructor
 public class Tester {
@@ -59,5 +58,8 @@ public class Tester {
         this.image = requestDto.getImage();
         this.questions = new ArrayList<>();
     }
-
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
 }

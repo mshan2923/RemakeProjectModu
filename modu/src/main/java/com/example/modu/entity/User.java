@@ -44,4 +44,9 @@ public class User {
         this.password = password;
         this.image = image;
     }
+    public List<Tester> addTest(Tester tester)
+    {
+        this.tests.add(tester);
+        return this.tests;
+    }
 }

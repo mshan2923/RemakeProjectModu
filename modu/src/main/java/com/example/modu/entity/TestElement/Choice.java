@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "choice")
 @NoArgsConstructor
 public class Choice {
@@ -33,5 +32,9 @@ public class Choice {
     public Choice(ChoiceDto dto){
         this.content = dto.getContent();
         this.isCorrect = dto.isCorrect();
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 }
