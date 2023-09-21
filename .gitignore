@@ -31,3 +31,5 @@ hs_err_pid*
 replay_pid*
 modu/.gitignore
 modu/src/main/resources/application.properties
+modu/.gradle
+modu/build
