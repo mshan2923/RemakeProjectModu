@@ -77,6 +77,16 @@ public class TesterService {
         return new TestDetailResponseDto(tester);
     }
 
+    // 테스트 삭제
+    public void deleteTester(Long testId) {
+        User currentUser = getCurrentUser();
+        Tester tester = findTesterById(testId);
+
+        validateUserAuthority(tester, currentUser);
+
+        testerRepository.delete(tester);
+    }
+
     // 현재 로그인한 회원 정보 가져오기
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -93,7 +103,7 @@ public class TesterService {
 
     // 본인이 작성한 테스트인지 확인
     private void validateUserAuthority(Tester tester, User currentUser) {
-        if (tester.getUser().equals(currentUser)) {
+        if (!tester.getUser().equals(currentUser)) {
             throw new IllegalArgumentException("본인의 테스트만 수정/삭제 할 수 있습니다.");
         }
     }
