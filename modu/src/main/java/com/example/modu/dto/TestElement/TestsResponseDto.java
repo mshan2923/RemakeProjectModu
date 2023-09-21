@@ -14,8 +14,8 @@ public class TestsResponseDto {
     private String username;
     private String title;
     private String image;
-    private Long views;
-    private Long likes;
+    private int views;
+    private int likes;
     private String category;
     private List<CommentResponseDto> comments;
 

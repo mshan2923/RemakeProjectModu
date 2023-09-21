@@ -15,6 +15,8 @@ public class TestMakeRequestDto {
     private String content;
     private String image;
     private String category;
+    private int views;
+    private int likes;
     private List<QuestionDto> questions;
     private List<ResultRequestDto> results;
 

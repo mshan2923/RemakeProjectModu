@@ -22,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,6 +82,7 @@ public class TesterService {
     // 테스트 상세 조회
     public TestDetailResponseDto getTestById(Long testId) {
         Tester tester = findTesterById(testId);
+        tester.increaseViews();
         return new TestDetailResponseDto(tester);
     }
 

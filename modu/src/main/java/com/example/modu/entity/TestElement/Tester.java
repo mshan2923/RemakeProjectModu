@@ -33,10 +33,10 @@ public class Tester {
     private String category;
 
     @Column(name = "views", nullable = false, columnDefinition = "bigint default 0")
-    private Long views=0L;
+    private int views=0;
 
     @Column(name = "likes", nullable = false, columnDefinition = "bigint default 0")
-    private Long likes=0L;
+    private int likes=0;
 
     // User FK - 하나의 유저가 여러 테스트를 생성
     @ManyToOne
@@ -65,5 +65,13 @@ public class Tester {
     public void setUser(User user)
     {
         this.user = user;
+    }
+
+    public void increaseLikes(){
+        this.likes += 1;
+    }
+
+    public void increaseViews(){
+        this.views += 1;
     }
 }
