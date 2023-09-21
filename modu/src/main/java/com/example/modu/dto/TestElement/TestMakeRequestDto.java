@@ -1,5 +1,6 @@
 package com.example.modu.dto.TestElement;
 
+import com.example.modu.dto.result.ResultRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,4 +15,5 @@ public class TestMakeRequestDto {
     private String content;
     private String image;
     private List<QuestionDto> questions;
+    private List<ResultRequestDto> results;
 }

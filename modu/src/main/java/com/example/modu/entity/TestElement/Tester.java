@@ -48,9 +48,9 @@ public class Tester {
     @OneToMany(mappedBy = "tester", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    // Tag FK - 하나의 테스트에 여러 태그
+    // Tag FK - 하나의 테스트에 여러 결과
     @OneToMany(mappedBy = "tester", cascade = CascadeType.ALL)
-    private List<Tag> tags = new ArrayList<>();
+    private List<Result> results = new ArrayList<>();
 
     public Tester(TestMakeRequestDto requestDto){
         this.title = requestDto.getTitle();

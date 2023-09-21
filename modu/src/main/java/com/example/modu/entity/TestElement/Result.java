@@ -1,4 +1,5 @@
 package com.example.modu.entity.TestElement;
+import com.example.modu.dto.result.ResultRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,4 +23,17 @@ public class Result {
     @Column(name = "score", nullable = false)
     private int score;
 
+    @ManyToOne
+    @JoinColumn(name = "testerId")
+    private Tester tester;
+
+    public Result(ResultRequestDto dto){
+        this.image = dto.getImage();
+        this.content = dto.getContent();
+        this.score = dto.getScore();
+    }
+
+    public void setResult(Tester tester){
+        this.tester = tester;
+    }
 }

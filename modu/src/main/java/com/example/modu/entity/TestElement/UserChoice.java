@@ -1,6 +1,5 @@
 package com.example.modu.entity.TestElement;
 
-import com.example.modu.entity.TestElement.Choice;
 import com.example.modu.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
