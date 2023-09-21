@@ -13,6 +13,9 @@ import com.example.modu.repository.TesterRepository;
 import com.example.modu.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -63,12 +66,12 @@ public class TesterService {
 
         return ResponseEntity.ok(new StatusResponseDto("생성 성공", 200));
     }
-    public ResponseEntity<List<TestsResponseDto>> getAllTests()
-    {
-        List<Tester> testers = testerRepository.findAll();
-        return ResponseEntity.ok(testers.stream()
-                .map(TestsResponseDto::new)
-                .collect(Collectors.toList()));
+
+    // 테스트 조회
+    public List<TestsResponseDto> getAllTests(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Tester> testers = testerRepository.findAll(pageable);
+        return testers.stream().map(TestsResponseDto::new).collect(Collectors.toList());
     }
 
     // 현재 로그인한 회원 정보 가져오기

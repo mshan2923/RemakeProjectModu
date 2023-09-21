@@ -37,7 +37,8 @@ public class TesterController {
 
     // 테스트 조회
     @GetMapping("/tests")
-    public ResponseEntity<List<TestsResponseDto>> getAllTests() {
-        return testerService.getAllTests();
+    public List<TestsResponseDto> getAllTests(@RequestParam(defaultValue = "0") int page,
+                                              @RequestParam(defaultValue = "10") int size) {
+        return testerService.getAllTests(page, size);
     }
 }
