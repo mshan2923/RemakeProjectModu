@@ -5,12 +5,14 @@ import com.example.modu.dto.TestElement.TestMakeRequestDto;
 import com.example.modu.dto.TestElement.TestsResponseDto;
 import com.example.modu.dto.result.ResultResponseDto;
 import com.example.modu.dto.user.StatusResponseDto;
+import com.example.modu.entity.User;
 import com.example.modu.service.TesterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,6 +65,10 @@ public class TesterController {
         }
     }
 
-    // 테스트 참여 및 결과 생성
 
+    @PostMapping("/test/like")
+    public ResponseEntity<StatusResponseDto> likeTester(@AuthenticationPrincipal User user)
+    {
+        return testerService.likeTest(user);
+    }
 }

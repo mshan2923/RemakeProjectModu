@@ -10,7 +10,5 @@ import java.util.Optional;
 
 public interface TesterRepository extends JpaRepository<Tester, Long> {
     List<Tester> findAllByUser(User user);
-    List<Tester> findAllByUserInOrId(Collection<User> user, Long id);
-    List<Tester> findAllByUserIsAndId(User user, Long id);
 
 }
