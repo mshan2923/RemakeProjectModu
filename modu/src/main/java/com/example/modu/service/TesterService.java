@@ -60,12 +60,12 @@ public class TesterService {
             }
         }
 
-        // 테스트 결과 생성
-        for(ResultRequestDto resultRequestDto : requestDto.getResults()){
-            Result result = new Result(resultRequestDto);
-            result.setResult(tester);
-            tester.getResults().add(result);
-        }
+//        // 테스트 결과 생성
+//        for(ResultRequestDto resultRequestDto : requestDto.getResults()){
+//            Result result = new Result(resultRequestDto);
+//            result.setResult(tester);
+//            tester.getResults().add(result);
+//        }
 
         testerRepository.save(tester);
 
