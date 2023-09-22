@@ -46,7 +46,7 @@ public class UserService {
             throw new IllegalArgumentException("중복된 사용자가 존재 합니다.");
         
         String cryptPassword = cryptPassword(requestDto.getPassword());
-        User user = new User(requestDto.getUsername(), requestDto.getEmail(), cryptPassword, requestDto.getEmail());
+        User user = new User(requestDto.getUsername(), requestDto.getEmail(), requestDto.getNickname(), cryptPassword, requestDto.getEmail());
         
         userRepository.save(user);
         
@@ -91,7 +91,7 @@ public class UserService {
         if (user == null)
             throw new IllegalArgumentException("인증 되지 않은 유저");
 
-        user.Update(updateValue.getEmail(), cryptPassword(updateValue.getPassword()));
+        user.Update(updateValue.getNickname(), cryptPassword(updateValue.getPassword()));
         
         return ResponseEntity.ok(new StatusResponseDto("변경 완료", 200));
     }

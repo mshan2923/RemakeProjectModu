@@ -30,6 +30,9 @@ public class User implements UserDetails {
     @Pattern(regexp = "^[a-zA-Z가-힣0-9]{2,}$")
     private String username;
 
+    @Column(name = "nickname", nullable = false)
+    private String nickname;
+
     @Column(name = "email", nullable = false)
     @Pattern(regexp = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$")
     private String email;
@@ -45,12 +48,13 @@ public class User implements UserDetails {
 
 
 
-    public User(String username, String email, String password, String image)
+    public User(String username, String email, String password, String image, String nickname)
     {
         this.username = username;
         this.email = email;
         this.password = password;
         this.image = image;
+        this.nickname = nickname;
     }
     public List<Tester> addTest(Tester tester)
     {
@@ -83,9 +87,9 @@ public class User implements UserDetails {
         return true;
     }
 
-    public void Update(String email, String password)
+    public void Update(String nickname, String password)
     {
-        this.email = email;
+        this.nickname = nickname;
         this.password = password;
     }
 }

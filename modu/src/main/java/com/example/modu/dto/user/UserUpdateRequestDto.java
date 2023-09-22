@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserUpdateRequestDto {
     private String password;
-    private String email;
+    private String nickname;
 }
