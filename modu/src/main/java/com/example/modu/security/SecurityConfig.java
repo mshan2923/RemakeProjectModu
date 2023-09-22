@@ -22,6 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.session.SessionInformationExpiredEvent;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 import java.io.IOException;
 
@@ -52,6 +54,7 @@ public class SecurityConfig {
     {
         try {
             http.csrf(t -> t.disable());
+            //http.sessionManagement();//notWork
             http.authorizeHttpRequests(auth ->
                     auth
                             .requestMatchers("/").permitAll()

@@ -1,5 +1,6 @@
 package com.example.modu.entity;
 
+import com.example.modu.dto.user.UserUpdateRequestDto;
 import com.example.modu.entity.TestElement.Tester;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,6 +42,8 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Tester> tests = new ArrayList<>();
+
+
 
     public User(String username, String email, String password, String image)
     {
@@ -77,5 +81,11 @@ public class User implements UserDetails {
     @Override//계정 사용 가능 여부
     public boolean isEnabled() {
         return true;
+    }
+
+    public void Update(String email, String password)
+    {
+        this.email = email;
+        this.password = password;
     }
 }
