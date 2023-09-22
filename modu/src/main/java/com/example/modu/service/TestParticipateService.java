@@ -1,6 +1,7 @@
 package com.example.modu.service;
 
 import com.example.modu.dto.TestElement.ChoiceDto;
+import com.example.modu.dto.result.ParticipateRequestDto;
 import com.example.modu.dto.result.ResultResponseDto;
 import com.example.modu.entity.TestElement.Result;
 import com.example.modu.entity.TestElement.Tester;
@@ -19,11 +20,11 @@ public class TestParticipateService {
     private final TesterRepository testerRepository;
     private final ResultRepository resultRepository;
 
-    public ResultResponseDto participateTest(Long testId, List<ChoiceDto> userChoices){
+    public ResultResponseDto participateTest(Long testId, ParticipateRequestDto userChoices){
         Tester tester = findTesterById(testId);
 
         int userScore = 0;
-        for(ChoiceDto choiceDto : userChoices){
+        for(ChoiceDto choiceDto : userChoices.getUserChoices()){
             if(choiceDto.isCorrect()){
                 userScore ++;
             }
