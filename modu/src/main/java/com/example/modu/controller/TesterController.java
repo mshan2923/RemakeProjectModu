@@ -3,6 +3,7 @@ package com.example.modu.controller;
 import com.example.modu.dto.TestElement.TestDetailResponseDto;
 import com.example.modu.dto.TestElement.TestMakeRequestDto;
 import com.example.modu.dto.TestElement.TestsResponseDto;
+import com.example.modu.dto.result.ResultResponseDto;
 import com.example.modu.dto.user.StatusResponseDto;
 import com.example.modu.service.TesterService;
 import lombok.RequiredArgsConstructor;
@@ -61,4 +62,7 @@ public class TesterController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new StatusResponseDto("테스트 삭제 중 오류 발생.", 500));
         }
     }
+
+    // 테스트 참여 및 결과 생성
+
 }

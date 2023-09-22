@@ -1,9 +1,11 @@
 package com.example.modu.service;
 
 import com.example.modu.dto.TestElement.*;
+import com.example.modu.dto.result.ResultRequestDto;
 import com.example.modu.dto.user.StatusResponseDto;
 import com.example.modu.entity.TestElement.Choice;
 import com.example.modu.entity.TestElement.Question;
+import com.example.modu.entity.TestElement.Result;
 import com.example.modu.entity.TestElement.Tester;
 import com.example.modu.entity.User;
 import com.example.modu.repository.TesterRepository;
@@ -20,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,17 +47,24 @@ public class TesterService {
         tester.setUser(currentUser);
         currentUser.addTest(tester);
 
-
+        // 테스트 질문 생성
         for(QuestionDto questionDto : requestDto.getQuestions()){
             Question question = new Question(questionDto);
             question.setTester(tester);
             tester.getQuestions().add(question);
-
+            // 테스트 보기 생성
             for(ChoiceDto choiceDto : questionDto.getChoices()){
                 Choice choice = new Choice(choiceDto);
                 choice.setQuestion(question);
                 question.getChoices().add(choice);
             }
+        }
+
+        // 테스트 결과 생성
+        for(ResultRequestDto resultRequestDto : requestDto.getResults()){
+            Result result = new Result(resultRequestDto);
+            result.setResult(tester);
+            tester.getResults().add(result);
         }
 
         testerRepository.save(tester);
@@ -74,6 +82,7 @@ public class TesterService {
     // 테스트 상세 조회
     public TestDetailResponseDto getTestById(Long testId) {
         Tester tester = findTesterById(testId);
+        tester.increaseViews();
         return new TestDetailResponseDto(tester);
     }
 

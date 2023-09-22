@@ -29,11 +29,14 @@ public class Tester {
     @Column(name = "image", nullable = true)
     private String image;
 
+    @Column(name = "category", nullable = false)
+    private String category;
+
     @Column(name = "views", nullable = false, columnDefinition = "bigint default 0")
-    private Long views=0L;
+    private int views=0;
 
     @Column(name = "likes", nullable = false, columnDefinition = "bigint default 0")
-    private Long likes=0L;
+    private int likes=0;
 
     // User FK - 하나의 유저가 여러 테스트를 생성
     @ManyToOne
@@ -48,18 +51,27 @@ public class Tester {
     @OneToMany(mappedBy = "tester", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    // Tag FK - 하나의 테스트에 여러 태그
+    // Tag FK - 하나의 테스트에 여러 결과
     @OneToMany(mappedBy = "tester", cascade = CascadeType.ALL)
-    private List<Tag> tags = new ArrayList<>();
+    private List<Result> results = new ArrayList<>();
 
     public Tester(TestMakeRequestDto requestDto){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.image = requestDto.getImage();
+        this.category = requestDto.getCategory();
         this.questions = new ArrayList<>();
     }
     public void setUser(User user)
     {
         this.user = user;
+    }
+
+    public void increaseLikes(){
+        this.likes += 1;
+    }
+
+    public void increaseViews(){
+        this.views += 1;
     }
 }

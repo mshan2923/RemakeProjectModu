@@ -14,9 +14,9 @@ public class TestsResponseDto {
     private String username;
     private String title;
     private String image;
-    private Long views;
-    private Long likes;
-    private List<TagDto> tags;
+    private int views;
+    private int likes;
+    private String category;
     private List<CommentResponseDto> comments;
 
     public TestsResponseDto(Tester tester) {
@@ -25,7 +25,7 @@ public class TestsResponseDto {
         this.image = tester.getImage();
         this.views = tester.getViews();
         this.likes = tester.getLikes();
-        this.tags = tester.getTags().stream().map(TagDto::new).collect(Collectors.toList());
+        this.category = tester.getCategory();
         this.comments = tester.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
     }
 
