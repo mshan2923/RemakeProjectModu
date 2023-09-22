@@ -14,15 +14,4 @@ public class ModuApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ModuApplication.class, args);
 	}
-
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*");//http://front-server.com
-			}
-		};
-	}
-
 }
