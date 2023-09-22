@@ -61,7 +61,14 @@ public class SecurityConfig {
                             .requestMatchers("/api/**").permitAll()
                             .anyRequest().authenticated()
                     );
-            http.cors(cors -> cors.configure(http));
+
+            http.cors(cors -> {
+                try {
+                    cors.init(http);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
             http.formLogin(formLogin ->
                     formLogin.loginPage("/api/user/loginForm")

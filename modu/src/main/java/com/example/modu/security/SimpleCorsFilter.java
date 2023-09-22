@@ -1,3 +1,4 @@
+/*
 package com.example.modu.security;
 
 import jakarta.servlet.*;
@@ -38,3 +39,4 @@ public class SimpleCorsFilter implements Filter {
         Filter.super.destroy();
     }
 }
+*/
