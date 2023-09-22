@@ -123,4 +123,12 @@ public class TesterService {
                 () -> new IllegalArgumentException("해당 테스트를 찾을 수 없습니다.")
         );
     }
+
+    public ResponseEntity<StatusResponseDto> likeTest(User user)
+    {
+        if (user == null)
+            throw new IllegalArgumentException("인증 되지 않은 유저");
+        
+        return ResponseEntity.ok(new StatusResponseDto("테스트 찜하기 완료", 200));
+    }
 }

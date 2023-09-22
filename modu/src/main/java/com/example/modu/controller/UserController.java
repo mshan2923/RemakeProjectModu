@@ -37,10 +37,10 @@ public class UserController {
         return "login";
     }// @RestController , @RestControllerAdvice 둘중 하나 있으면 문자열로 리턴
 
-    @GetMapping("/signupFrom")
+    @GetMapping("/signupForm")
     private String signupPage()
     {
-        return "signupFrom";
+        return "signupForm";
     }
     @PostMapping("/signup")
     private ResponseEntity<StatusResponseDto> signup(@RequestBody SignupRequestDto signup) {
@@ -62,7 +62,7 @@ public class UserController {
     @DeleteMapping("/delete")
     private ResponseEntity<StatusResponseDto> deleteUser(@AuthenticationPrincipal User user)
     {
-        return userService.deleteUser(user);
+        return userService.deleteUser(user);//============ 아직 구현 안함!
     }
     /*
     @PostMapping("/login")

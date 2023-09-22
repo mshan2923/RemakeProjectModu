@@ -61,6 +61,7 @@ public class SecurityConfig {
                             .requestMatchers("/api/**").permitAll()
                             .anyRequest().authenticated()
                     );
+            http.cors(cors -> cors.configure(http));
 
             http.formLogin(formLogin ->
                     formLogin.loginPage("/api/user/loginForm")
