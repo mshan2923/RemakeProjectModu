@@ -25,13 +25,13 @@ import java.util.List;
 public class TesterController {
 
     private final TesterService testerService;
-
+    /*
     // 테스트 만들기 폼 페이지
     @GetMapping("/test/testMakeForm")
     public String testMakeForm(){
         return "testMakeForm";
     }
-
+    */
 
     // 테스트 만들기
     @PostMapping("/test/testMakeForm")

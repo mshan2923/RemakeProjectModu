@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class HomeController {
-
+    /*
     @GetMapping("/")
     private String Home()
     {
         return "index";
-    }
+    }*/
 }

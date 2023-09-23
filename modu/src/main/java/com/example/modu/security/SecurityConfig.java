@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.filters.CorsFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,6 +17,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,6 +27,8 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.session.SessionInformationExpiredEvent;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.io.IOException;
 
@@ -49,12 +54,36 @@ public class SecurityConfig {
                 .requestMatchers("/static/**");
     }
 
+    /*
+    @Bean
+    public FilterRegistrationBean<CorsFilter> corsFilterFilterRegistrationBean()
+    {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(false);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.setMaxAge(6000L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+
+        FilterRegistrationBean<CorsFilter> filterBean = new FilterRegistrationBean<>(new CorsFilter());
+        filterBean.addUrlPatterns("/**");
+        filterBean.setOrder(0);
+
+        return filterBean;
+    }*/
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
         try {
+            http.httpBasic(basic -> basic.disable());//basic Auth filter 비활성화
             http.csrf(t -> t.disable());
-            //http.sessionManagement();//notWork
+            http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+
             http.authorizeHttpRequests(auth ->
                     auth
                             .requestMatchers("/").permitAll()
@@ -64,7 +93,7 @@ public class SecurityConfig {
             http.cors(cors -> cors.configure(http));
 
             http.formLogin(formLogin ->
-                    formLogin.loginPage("/api/user/loginForm")
+                    formLogin.loginPage("/api/user/loginForm")//<-- 서비스 로직 으로?
                             .usernameParameter("username")
                             .passwordParameter("password")
                             .loginProcessingUrl("/api/user/login")

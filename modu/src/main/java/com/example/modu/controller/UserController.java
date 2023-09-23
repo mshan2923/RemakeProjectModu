@@ -32,16 +32,17 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/loginForm")
-    private String loginPage()
+    private ResponseEntity<String> loginPage()
     {
-        return "login";
+        //----       + 인증 인가
+        return ResponseEntity.ok("로그인!");
     }// @RestController , @RestControllerAdvice 둘중 하나 있으면 문자열로 리턴
-
+    /*
     @GetMapping("/signupForm")
     private String signupPage()
     {
         return "signupForm";
-    }
+    }*/
     @PostMapping("/signup")
     private ResponseEntity<StatusResponseDto> signup(@RequestBody SignupRequestDto signup) {
         return userService.signup(signup);
