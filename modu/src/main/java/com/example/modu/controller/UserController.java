@@ -34,8 +34,10 @@ public class UserController {
     @GetMapping("/loginForm")
     private ResponseEntity<String> loginPage()
     {
+        //new SecurityContextLoginModule().
         //----       + 인증 인가
-        return ResponseEntity.ok("로그인!");
+        return ResponseEntity.ok("로그인!");//---> 실패해야 뜸
+        //============================================= 로그인 실패해도 뜸
     }// @RestController , @RestControllerAdvice 둘중 하나 있으면 문자열로 리턴
     /*
     @GetMapping("/signupForm")

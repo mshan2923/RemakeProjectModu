@@ -81,7 +81,8 @@ public class SecurityConfig {
         try {
             http.httpBasic(basic -> basic.disable());//basic Auth filter 비활성화
             http.csrf(t -> t.disable());
-            http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+            //http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                //세션 대신 JWT 쓸때
 
 
             http.authorizeHttpRequests(auth ->
