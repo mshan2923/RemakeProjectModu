@@ -20,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,6 +81,7 @@ public class TesterService {
     }
 
     // 테스트 상세 조회
+    @Transactional
     public TestDetailResponseDto getTestById(Long testId) {
         Tester tester = findTesterById(testId);
         tester.increaseViews();
