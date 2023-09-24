@@ -5,6 +5,7 @@ import com.example.modu.entity.TestElement.Tester;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,8 @@ public class TestsResponseDto {
     private int likes;
     private String category;
     private List<CommentResponseDto> comments;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
 
     public TestsResponseDto(Tester tester) {
         this.username = tester.getUser().getUsername();
@@ -27,6 +30,8 @@ public class TestsResponseDto {
         this.likes = tester.getLikes();
         this.category = tester.getCategory();
         this.comments = tester.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
+        this.createdAt = tester.getCreatedAt();
+        this.modifiedAt = tester.getModifiedAt();
     }
 
 }

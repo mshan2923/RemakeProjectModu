@@ -2,6 +2,7 @@ package com.example.modu.entity.TestElement;
 
 import com.example.modu.dto.TestElement.TestMakeRequestDto;
 import com.example.modu.entity.Comment;
+import com.example.modu.entity.Timestamped;
 import com.example.modu.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.util.List;
 @Getter
 @Table(name = "tester")
 @NoArgsConstructor
-public class Tester {
+public class Tester extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
