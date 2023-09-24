@@ -64,11 +64,11 @@ public class UserController {
     {
         return userService.deleteUser(user);//============ 아직 구현 안함!
     }
-    /*
+
     @PostMapping("/login")
     private ResponseEntity<StatusResponseDto> login(@RequestBody LoginRequestDto login) {
         return userService.login(login);
-    }*/
+    }
 
     //======= 전부 한줄로 Service 에서 전부 처리 + if문 도
 

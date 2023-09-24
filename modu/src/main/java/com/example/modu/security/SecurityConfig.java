@@ -57,7 +57,7 @@ public class SecurityConfig {
             //http.sessionManagement();//notWork
             http.authorizeHttpRequests(auth ->
                     auth
-                            .requestMatchers("/").permitAll()
+                            .requestMatchers("/*").permitAll()
                             .requestMatchers("/api/**").permitAll()
                             .anyRequest().authenticated()
                     );

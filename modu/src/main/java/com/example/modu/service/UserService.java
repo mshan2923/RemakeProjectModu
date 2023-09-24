@@ -46,14 +46,14 @@ public class UserService {
             throw new IllegalArgumentException("중복된 사용자가 존재 합니다.");
         
         String cryptPassword = cryptPassword(requestDto.getPassword());
-        User user = new User(requestDto.getUsername(), requestDto.getEmail(), requestDto.getNickname(), cryptPassword, requestDto.getEmail());
+        User user = new User(requestDto.getUsername(), requestDto.getEmail(), cryptPassword, requestDto.getEmail(), requestDto.getNickname());
         
         userRepository.save(user);
         
         return ResponseEntity.ok(new StatusResponseDto("회원가입 성공" , 200));
     }
 
-    /*
+
     public  ResponseEntity<StatusResponseDto> login(LoginRequestDto requestDto)
     {
         Optional<User> target = userRepository.findByUsername(requestDto.getUsername());
@@ -67,7 +67,7 @@ public class UserService {
 
         return ResponseEntity.ok(new StatusResponseDto("로그인 성공", 200));
     }
-    */
+
 
     public String myPage(User user)
     {
