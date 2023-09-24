@@ -24,5 +24,10 @@ public class CommentController {
         return commentService.createComment(testerId, requestDto);
     }
 
-
+    // 댓글 수정
+    @PostMapping("{testerId}/comment/{commentId}")
+    public ResponseEntity<StatusResponseDto> updateComment(@PathVariable Long testerId, @PathVariable Long commentId, @RequestBody CommentRequestDto requestDto){
+        return commentService.updateComment(testerId, commentId, requestDto);
+    }
 }
+

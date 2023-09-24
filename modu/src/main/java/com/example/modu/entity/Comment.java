@@ -41,4 +41,8 @@ public class Comment {
     public void setTester(Tester tester){
         this.tester = tester;
     }
+
+    public void update(CommentRequestDto requestDto) {
+        this.content = requestDto.getContent();
+    }
 }
