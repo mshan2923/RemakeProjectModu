@@ -1,5 +1,6 @@
 package com.example.modu.entity;
 
+import com.example.modu.dto.comment.CommentRequestDto;
 import com.example.modu.entity.TestElement.Tester;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,4 +29,16 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "testerId")
     private Tester tester;
+
+    public Comment(CommentRequestDto commentRequestDto){
+        this.content = commentRequestDto.getContent();
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
+
+    public void setTester(Tester tester){
+        this.tester = tester;
+    }
 }
