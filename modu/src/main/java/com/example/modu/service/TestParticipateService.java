@@ -46,6 +46,8 @@ public class TestParticipateService {
         userTestResult.setTester(tester);
         userTestResult.setScore(userScore);
 
+        tester.increaseParticipates();
+
         userTestResultRepository.save(userTestResult);
 
         return new ResultResponseDto(userScore);
