@@ -59,7 +59,17 @@ public class CommentService {
         return ResponseEntity.ok(new StatusResponseDto("댓글 수정 완료", 200));
     }
 
+    // 댓글 삭제
+    public ResponseEntity<StatusResponseDto> deleteComment(Long testerId, Long commentId) {
+        User currentUser = getCurrentUser();
+        Comment comment = findCommentById(commentId);
 
+        validateUserAuthority(comment, currentUser);
+
+        commentRepository.delete(comment);
+
+        return ResponseEntity.ok(new StatusResponseDto("댓글 삭제 완료", 200));
+    }
 
     // 현재 로그인한 회원 정보 가져오기
     public User getCurrentUser() {
@@ -95,4 +105,6 @@ public class CommentService {
             throw new IllegalArgumentException("본인의 댓글만 수정/삭제 할 수 있습니다.");
         }
     }
+
+
 }
