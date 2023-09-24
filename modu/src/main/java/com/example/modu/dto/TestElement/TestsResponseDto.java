@@ -17,6 +17,7 @@ public class TestsResponseDto {
     private String image;
     private int views;
     private int likes;
+    private int participates;
     private String category;
     private List<CommentResponseDto> comments;
     private LocalDateTime createdAt;
@@ -28,6 +29,7 @@ public class TestsResponseDto {
         this.image = tester.getImage();
         this.views = tester.getViews();
         this.likes = tester.getLikes();
+        this.participates = tester.getParticipates();
         this.category = tester.getCategory();
         this.comments = tester.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
         this.createdAt = tester.getCreatedAt();

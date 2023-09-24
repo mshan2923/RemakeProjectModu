@@ -39,6 +39,9 @@ public class Tester extends Timestamped {
     @Column(name = "likes", nullable = false, columnDefinition = "bigint default 0")
     private int likes=0;
 
+    @Column(name = "participates", nullable = false, columnDefinition = "bigint default 0")
+    private int participates=0;
+
     // User FK - 하나의 유저가 여러 테스트를 생성
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -70,6 +73,10 @@ public class Tester extends Timestamped {
 
     public void increaseLikes(){
         this.likes += 1;
+    }
+
+    public void increaseParticipates(){
+        this.participates += 1;
     }
 
     public void increaseViews(){
