@@ -20,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,7 +80,15 @@ public class TesterService {
         return testers.stream().map(TestsResponseDto::new).collect(Collectors.toList());
     }
 
+    // 카테고리별 테스트 조회
+    public List<TestsResponseDto> getTestsByCategory(String category, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Tester> testers = testerRepository.findAllByCategory(category, pageable);
+        return testers.stream().map(TestsResponseDto::new).collect(Collectors.toList());
+    }
+
     // 테스트 상세 조회
+    @Transactional
     public TestDetailResponseDto getTestById(Long testId) {
         Tester tester = findTesterById(testId);
         tester.increaseViews();
@@ -131,4 +140,6 @@ public class TesterService {
         
         return ResponseEntity.ok(new StatusResponseDto("테스트 찜하기 완료", 200));
     }
+
+
 }

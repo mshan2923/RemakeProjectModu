@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Deprecated//미사용 표시
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -19,7 +18,7 @@ public class TestParticipateController {
 
 
     @PostMapping("/participate/{testId}")
-    public ResultResponseDto participate(@PathVariable Long testId, @RequestBody ParticipateRequestDto userChoices) {
-        return testParticipateService.participateTest(testId, userChoices);
+    public ResultResponseDto participate(@PathVariable Long testId, @RequestBody ParticipateRequestDto dto) {
+        return testParticipateService.participateTest(testId, dto);
     }
 }

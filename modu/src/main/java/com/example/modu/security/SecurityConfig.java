@@ -90,7 +90,7 @@ public class SecurityConfig {
 
             http.authorizeHttpRequests(auth ->
                     auth
-                            .requestMatchers("/").permitAll()
+                            .requestMatchers("/*").permitAll()
                             .requestMatchers("/api/**").permitAll()
                             .anyRequest().authenticated()
                     );

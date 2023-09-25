@@ -9,23 +9,32 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "user_choice")
+@Table(name = "userTestResult")
 @NoArgsConstructor
-public class UserChoice {
+public class UserTestResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private int score;
 
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "choiceId")
-    private Choice choice;
+    @JoinColumn(name = "testerId")
+    private Tester tester;
 
-    public UserChoice(User user, Choice choice) {
+    public UserTestResult(int score) {
+        this.score = score;
+    }
+
+    public void setUser(User user){
         this.user = user;
-        this.choice = choice;
+    }
+
+    public void setTester(Tester tester){
+        this.tester = tester;
     }
 }

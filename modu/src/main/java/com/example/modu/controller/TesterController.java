@@ -46,6 +46,14 @@ public class TesterController {
         return testerService.getAllTests(page, size);
     }
 
+    // 카테고리별 테스트 조회
+    @GetMapping("/tests/{category}")
+    public List<TestsResponseDto> getTestsByCategory(@PathVariable String category,
+                                                     @RequestParam(defaultValue = "0") int page,
+                                                     @RequestParam(defaultValue = "10") int size){
+        return testerService.getTestsByCategory(category, page, size);
+    }
+
     // 테스트 상세 조회
     @GetMapping("/test/{testId}")
     public TestDetailResponseDto getTestById(@PathVariable Long testId) {

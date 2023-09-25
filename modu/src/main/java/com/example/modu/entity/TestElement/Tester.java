@@ -2,6 +2,7 @@ package com.example.modu.entity.TestElement;
 
 import com.example.modu.dto.TestElement.TestMakeRequestDto;
 import com.example.modu.entity.Comment;
+import com.example.modu.entity.Timestamped;
 import com.example.modu.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.util.List;
 @Getter
 @Table(name = "tester")
 @NoArgsConstructor
-public class Tester {
+public class Tester extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,6 +38,9 @@ public class Tester {
 
     @Column(name = "likes", nullable = false, columnDefinition = "bigint default 0")
     private int likes=0;
+
+    @Column(name = "participates", nullable = false, columnDefinition = "bigint default 0")
+    private int participates=0;
 
     // User FK - 하나의 유저가 여러 테스트를 생성
     @ManyToOne
@@ -69,6 +73,10 @@ public class Tester {
 
     public void increaseLikes(){
         this.likes += 1;
+    }
+
+    public void increaseParticipates(){
+        this.participates += 1;
     }
 
     public void increaseViews(){

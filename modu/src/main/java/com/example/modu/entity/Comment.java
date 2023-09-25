@@ -1,5 +1,6 @@
 package com.example.modu.entity;
 
+import com.example.modu.dto.comment.CommentRequestDto;
 import com.example.modu.entity.TestElement.Tester;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "comment")
 @NoArgsConstructor
-public class Comment {
+public class Comment extends Timestamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,4 +29,20 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "testerId")
     private Tester tester;
+
+    public Comment(CommentRequestDto commentRequestDto){
+        this.content = commentRequestDto.getContent();
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
+
+    public void setTester(Tester tester){
+        this.tester = tester;
+    }
+
+    public void update(CommentRequestDto requestDto) {
+        this.content = requestDto.getContent();
+    }
 }
