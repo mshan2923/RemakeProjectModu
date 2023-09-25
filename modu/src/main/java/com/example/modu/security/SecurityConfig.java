@@ -53,6 +53,8 @@ public class SecurityConfig {
         return (web) -> web.ignoring()
                 .requestMatchers("/static/**");
     }
+    @Bean
+    public SimpleCorsFilter simpleCorsFilter(){ return new SimpleCorsFilter();}
 
     /*
     @Bean
@@ -83,6 +85,7 @@ public class SecurityConfig {
             http.csrf(t -> t.disable());
             //http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
                 //세션 대신 JWT 쓸때
+            http.requiresChannel(channel -> channel.anyRequest().requiresInsecure());
 
 
             http.authorizeHttpRequests(auth ->
@@ -106,6 +109,8 @@ public class SecurityConfig {
         {
             log.warn("Security Error : " + e.getMessage());
         }
+
+        //http.addFilterBefore()
 
         return http.build();
     }

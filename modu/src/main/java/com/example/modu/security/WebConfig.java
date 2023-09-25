@@ -1,6 +1,7 @@
 package com.example.modu.security;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -8,6 +9,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@Slf4j(topic = "Web Config")
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
@@ -16,20 +18,24 @@ public class WebConfig implements WebMvcConfigurer {
     {
         registry.addMapping("/**")
                 .allowedOriginPatterns("*")
-                .allowedMethods("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
                 .allowedHeaders("*")
                 .allowCredentials(true)//프론트에서도 axios > allowCredentials 허용해야함
                 .maxAge(3600);
         //로그인후 request응답 헤더에 Origin, Access-Control-Request-Method,Access-Control-Request-Headers이 필요
     }
-    /*
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource()
     {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.addAllowedOrigin("*");
+        configuration.addAllowedOriginPattern("*");
+
         configuration.addAllowedMethod("*");
+        configuration.addAllowedMethod("GET");
+        configuration.addAllowedMethod("POST");
+
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
 
@@ -37,8 +43,11 @@ public class WebConfig implements WebMvcConfigurer {
         return new CorsConfigurationSource() {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+
+                log.info("--- " + request.getRequestURI()  + " / " + request.getMethod() + " / " + request.getProtocol() + " / " + request.getHeader("Origin")
+                + "\n" + request.getContextPath() + " / " + request.getRemoteUser() + " | "  + request.getServletPath() + " | " + request.getRemoteHost());
                 return configuration;
             }
         };
-    }*///-------------- 지나감
+    }//-------------- 지나감
 }

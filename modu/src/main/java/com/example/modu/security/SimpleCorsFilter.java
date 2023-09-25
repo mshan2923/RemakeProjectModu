@@ -3,10 +3,12 @@ package com.example.modu.security;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.logging.LogRecord;
 
+@Slf4j(topic = "SimpleCorsFilter")
 public class SimpleCorsFilter implements Filter {
 
     @Override
@@ -18,6 +20,8 @@ public class SimpleCorsFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
+
+        log.info("===========" + request.getRequestURI() + " + " + request.getMethod());
 
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         response.setHeader("Access-Control-Allow-Credentials", "true");
