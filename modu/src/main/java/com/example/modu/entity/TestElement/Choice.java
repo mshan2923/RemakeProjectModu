@@ -18,8 +18,8 @@ public class Choice {
     @Column(name = "content",nullable = false)
     private String content;
 
-    @Column(name = "isCorrect",nullable = false)
-    private boolean isCorrect;
+    @Column(name = "correct",nullable = false, columnDefinition = "boolean default false")
+    private boolean correct;
 
 //    @Column(name = "score",nullable = false)
 //    private int score;
@@ -31,7 +31,7 @@ public class Choice {
 
     public Choice(ChoiceDto dto){
         this.content = dto.getContent();
-        this.isCorrect = dto.isCorrect();
+        this.correct = dto.isCorrect();
     }
 
     public void setQuestion(Question question) {
