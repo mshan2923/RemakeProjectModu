@@ -6,15 +6,19 @@ import com.example.modu.dto.user.SignupRequestDto;
 import com.example.modu.dto.user.StatusResponseDto;
 import com.example.modu.dto.user.UserUpdateRequestDto;
 import com.example.modu.entity.TestElement.Tester;
+import com.example.modu.entity.TestElement.UserTestResult;
 import com.example.modu.entity.User;
 import com.example.modu.repository.TesterRepository;
 import com.example.modu.repository.UserRepository;
+import com.example.modu.repository.UserTestResultRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -27,6 +31,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final TesterRepository testerRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserTestResultRepository userTestResultRepository;
 
     public String cryptPassword(String password)
     {
@@ -80,9 +85,7 @@ public class UserService {
         if (user == null)
             throw new IllegalArgumentException("인증 되지 않은 유저");
 
-       List<Tester> result = testerRepository.findAllByUser(user);
-
-       return ResponseEntity.ok(result.stream().map(TestsResponseDto::new).toList());
+       return ResponseEntity.ok(testerRepository.findAllByUser(user).stream().map(TestsResponseDto::new).toList());
     }
     public ResponseEntity<StatusResponseDto> update(User user,
                                                     UserUpdateRequestDto updateValue)
@@ -102,4 +105,16 @@ public class UserService {
         userRepository.deleteById(user.getId());
         return ResponseEntity.ok(new StatusResponseDto("회원 탈퇴 완료", 200));
     }
+
+    public ResponseEntity<List<TestsResponseDto>> getJoinTests(User user)
+    {
+        List<UserTestResult> testResults = userTestResultRepository.findAllByUser_Id(user.getId());
+        TestsResponseDto[] Results = new TestsResponseDto[testResults.size()];//속도 때문에
+        for(int i = 0; i < testResults.size(); i++ )
+        {
+            Results[i] = new TestsResponseDto(testResults.get(i).getTester());
+        }
+        return ResponseEntity.ok(Arrays.stream(Results).toList());
+    }
+
 }

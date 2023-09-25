@@ -9,6 +9,7 @@ import com.example.modu.entity.User;
 import com.example.modu.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -69,15 +71,26 @@ public class UserController {
         return userService.login(login);
     }*///Security 가 처리
 
+    /*
     @GetMapping("/mypage") //단순 페이지 이동이라서 클라가 처리?
-    private String myPage(@AuthenticationPrincipal User user)
+    private String myPage(@Valid @AuthenticationPrincipal User user, BindingResult bindingResult)
     {
+        if (bindingResult.hasErrors())
+            return null;
         return userService.myPage(user);
-    }
+    }*/
 
     @GetMapping("/tests")
     private ResponseEntity<List<TestsResponseDto>> makedTests(@AuthenticationPrincipal User user)
     {
         return userService.makedTests(user);
     }
+    
+    
+    @GetMapping("/join-test")
+    private ResponseEntity<List<TestsResponseDto>> joinTests(@AuthenticationPrincipal User user)
+    {
+        return userService.getJoinTests(user);
+    }//===== 명세서에 없음
+
 }
