@@ -27,17 +27,12 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserController {
 
-    //private final JwtUtil jwtUtil;
-    //private final JwtService jwtService;
     private final UserService userService;
 
     @GetMapping("/loginForm")
     private ResponseEntity<String> loginPage()
     {
-        //new SecurityContextLoginModule().
-        //----       + 인증 인가
-        return ResponseEntity.ok("로그인!");//---> 실패해야 뜸
-        //============================================= 로그인 실패해도 뜸
+        return ResponseEntity.badRequest().body("로그인 실패!");//---> 실패해야 뜸 , 성공시 하이재킹 해감
     }// @RestController , @RestControllerAdvice 둘중 하나 있으면 문자열로 리턴
     /*
     @GetMapping("/signupForm")
@@ -65,21 +60,21 @@ public class UserController {
     @DeleteMapping("/delete")
     private ResponseEntity<StatusResponseDto> deleteUser(@AuthenticationPrincipal User user)
     {
-        return userService.deleteUser(user);//============ 아직 구현 안함!
+        return userService.deleteUser(user);
     }
 
+    /*
     @PostMapping("/login")
     private ResponseEntity<StatusResponseDto> login(@RequestBody LoginRequestDto login) {
         return userService.login(login);
-    }
+    }*///Security 가 처리
 
-    //======= 전부 한줄로 Service 에서 전부 처리 + if문 도
-
-    @GetMapping("/mypage")
+    @GetMapping("/mypage") //단순 페이지 이동이라서 클라가 처리?
     private String myPage(@AuthenticationPrincipal User user)
     {
         return userService.myPage(user);
     }
+
     @GetMapping("/tests")
     private ResponseEntity<List<TestsResponseDto>> makedTests(@AuthenticationPrincipal User user)
     {

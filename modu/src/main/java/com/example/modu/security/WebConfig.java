@@ -34,7 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
 
         configuration.addAllowedMethod("*");
         configuration.addAllowedMethod("GET");
-        configuration.addAllowedMethod("POST");
+        configuration.addAllowedMethod("POST");// * 이 있지만 혹시나 해서 넣어봄
 
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
@@ -49,5 +49,5 @@ public class WebConfig implements WebMvcConfigurer {
                 return configuration;
             }
         };
-    }//-------------- 지나감
+    }//프론트엔드에서 CORS 가 유효하면 , 여기로 옴
 }

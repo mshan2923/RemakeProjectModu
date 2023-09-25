@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.logging.LogRecord;
 
 @Slf4j(topic = "SimpleCorsFilter")
-public class SimpleCorsFilter implements Filter {
+public class SimpleCorsFilter implements Filter {//필요 없을...듯?
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

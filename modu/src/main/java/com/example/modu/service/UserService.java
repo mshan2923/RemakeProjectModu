@@ -96,6 +96,10 @@ public class UserService {
     }
     public ResponseEntity<StatusResponseDto> deleteUser(User user)
     {
-        return ResponseEntity.ok(new StatusResponseDto("아직 처리 구현 안함", 200));
+        if (user == null)
+            throw new IllegalArgumentException("인증 되지 않은 유저");
+
+        userRepository.deleteById(user.getId());
+        return ResponseEntity.ok(new StatusResponseDto("회원 탈퇴 완료", 200));
     }
 }

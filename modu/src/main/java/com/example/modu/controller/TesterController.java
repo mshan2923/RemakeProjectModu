@@ -63,14 +63,7 @@ public class TesterController {
     // 테스트 삭제
     @DeleteMapping("/test/{testId}")
     public ResponseEntity<StatusResponseDto> deleteTester(@PathVariable Long testId){
-        try{
-            testerService.deleteTester(testId);
-            return ResponseEntity.ok(new StatusResponseDto("테스트가 성공적으로 삭제됨.", 200));
-        }catch (IllegalArgumentException e){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new StatusResponseDto(e.getMessage(), 403));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new StatusResponseDto("테스트 삭제 중 오류 발생.", 500));
-        }
+        return testerService.deleteTester(testId);
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.modutest.entity;
+package com.example.modu.entity;
 
 public enum UserRoleEnum {
     USER(Authority.USER),  // 사용자 권한

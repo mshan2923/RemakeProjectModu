@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
+//@Setter
 @Table(name = "userTestResult")
 @NoArgsConstructor
 public class UserTestResult {
@@ -35,6 +35,13 @@ public class UserTestResult {
     }
 
     public void setTester(Tester tester){
+        this.tester = tester;
+    }
+
+    public UserTestResult(User user, int score, Tester tester)
+    {
+        this.user = user;
+        this.score = score;
         this.tester = tester;
     }
 }

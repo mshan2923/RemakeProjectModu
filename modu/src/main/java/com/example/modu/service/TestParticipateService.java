@@ -39,12 +39,17 @@ public class TestParticipateService {
                 userScore ++;
             }
         }
+
+        /*try{
+            userScore = (int) dto.getUserChoices().stream().filter(t -> choiceRepository.findById(t).get().isCorrect()).count();
+        }catch (IllegalArgumentException e)
+        {
+            throw new IllegalArgumentException("해당 번호의 보기가 없습니다.");
+        }*/
+
         System.out.println(userScore);
 
-        UserTestResult userTestResult = new UserTestResult();
-        userTestResult.setUser(currentUser);
-        userTestResult.setTester(tester);
-        userTestResult.setScore(userScore);
+        UserTestResult userTestResult = new UserTestResult(currentUser, userScore, tester);
 
         tester.increaseParticipates();
 

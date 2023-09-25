@@ -96,13 +96,15 @@ public class TesterService {
     }
 
     // 테스트 삭제
-    public void deleteTester(Long testId) {
+    public ResponseEntity<StatusResponseDto> deleteTester(Long testId) {
         User currentUser = getCurrentUser();
         Tester tester = findTesterById(testId);
 
         validateUserAuthority(tester, currentUser);
 
         testerRepository.delete(tester);
+
+        return ResponseEntity.ok(new StatusResponseDto("테스트가 성공적으로 삭제됨.", 200));
     }
 
     // 현재 로그인한 회원 정보 가져오기
