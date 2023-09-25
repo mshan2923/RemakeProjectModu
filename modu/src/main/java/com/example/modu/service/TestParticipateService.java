@@ -35,11 +35,14 @@ public class TestParticipateService {
         Tester tester = findTesterById(testId);
 
         int userScore = 0;
+        int maxScore = 0;
+
         for(Long choiceId : dto.getUserChoices()){
             Choice choice = choiceRepository.findById(choiceId).orElseThrow(()->new IllegalArgumentException("해당 번호의 보기가 없습니다."));
             if(choice.isCorrect()){
                 userScore ++;
             }
+            maxScore++;
         }
 
         /*try{
@@ -49,15 +52,13 @@ public class TestParticipateService {
             throw new IllegalArgumentException("해당 번호의 보기가 없습니다.");
         }*/
 
-        System.out.println(userScore);
-
-        UserTestResult userTestResult = new UserTestResult(currentUser, userScore, tester);
+        UserTestResult userTestResult = new UserTestResult(currentUser, userScore, maxScore, tester);
 
         tester.increaseParticipates();
 
         userTestResultRepository.save(userTestResult);
 
-        return new ResultResponseDto(userScore);
+        return new ResultResponseDto(userTestResult);
     }
 
 //    // 테스트 참여

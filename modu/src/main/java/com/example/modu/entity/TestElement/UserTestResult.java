@@ -18,6 +18,8 @@ public class UserTestResult {
 
     private int score;
 
+    private int maxScore;
+
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
@@ -25,10 +27,6 @@ public class UserTestResult {
     @ManyToOne
     @JoinColumn(name = "testerId")
     private Tester tester;
-
-    public UserTestResult(int score) {
-        this.score = score;
-    }
 
     public void setUser(User user){
         this.user = user;
@@ -38,10 +36,11 @@ public class UserTestResult {
         this.tester = tester;
     }
 
-    public UserTestResult(User user, int score, Tester tester)
+    public UserTestResult(User user, int score, int maxScore, Tester tester)
     {
         this.user = user;
         this.score = score;
+        this.maxScore = maxScore;
         this.tester = tester;
     }
 }
