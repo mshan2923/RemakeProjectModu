@@ -60,11 +60,11 @@ public class TestParticipateService {
         return new ResultResponseDto(userScore);
     }
 
-    // 테스트 참여
-    public TestStartResponseDto testStart(Long testId) {
-        Tester tester = findTesterById(testId);
-        return new TestStartResponseDto(tester);
-    }
+//    // 테스트 참여
+//    public TestStartResponseDto testStart(Long testId) {
+//        Tester tester = findTesterById(testId);
+//        return new TestStartResponseDto(tester);
+//    }
 
     // 현재 로그인한 회원 정보 가져오기
     public User getCurrentUser() {

@@ -1,6 +1,7 @@
 package com.example.modu.dto.TestElement;
 
 import com.example.modu.dto.comment.CommentResponseDto;
+import com.example.modu.dto.result.QuestionResponseDto;
 import com.example.modu.entity.TestElement.Tester;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class TestsResponseDto {
     private int participates;
     private String category;
     private List<CommentResponseDto> comments;
+    private List<QuestionResponseDto> questions;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
@@ -33,9 +35,10 @@ public class TestsResponseDto {
         this.likes = tester.getLikes();
         this.participates = tester.getParticipates();
         this.category = tester.getCategory();
-        this.comments = tester.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
         this.createdAt = tester.getCreatedAt();
         this.modifiedAt = tester.getModifiedAt();
+        this.questions = tester.getQuestions().stream().map(QuestionResponseDto::new).collect(Collectors.toList());
+        this.comments = tester.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
     }
 
 }

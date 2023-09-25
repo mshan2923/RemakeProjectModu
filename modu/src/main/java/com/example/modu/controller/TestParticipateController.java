@@ -23,9 +23,9 @@ public class TestParticipateController {
         return testParticipateService.participateTest(testId, dto);
     }
 
-    // 테스트 참여
-    @GetMapping("/participate/{testId}")
-    public TestStartResponseDto testStart(@PathVariable Long testId){
-        return testParticipateService.testStart(testId);
-    }
+//    // 테스트 참여
+//    @GetMapping("/participate/{testId}")
+//    public TestStartResponseDto testStart(@PathVariable Long testId){
+//        return testParticipateService.testStart(testId);
+//    }
 }
