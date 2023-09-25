@@ -3,6 +3,7 @@ package com.example.modu.service;
 import com.example.modu.dto.TestElement.ChoiceDto;
 import com.example.modu.dto.result.ParticipateRequestDto;
 import com.example.modu.dto.result.ResultResponseDto;
+import com.example.modu.dto.result.TestStartResponseDto;
 import com.example.modu.entity.TestElement.Choice;
 import com.example.modu.entity.TestElement.Result;
 import com.example.modu.entity.TestElement.Tester;
@@ -28,6 +29,7 @@ public class TestParticipateService {
     private final UserRepository userRepository;
     private final UserTestResultRepository userTestResultRepository;
 
+    // 테스트 완료
     public ResultResponseDto participateTest(Long testId, ParticipateRequestDto dto) {
         User currentUser = getCurrentUser();
         Tester tester = findTesterById(testId);
@@ -58,6 +60,12 @@ public class TestParticipateService {
         return new ResultResponseDto(userScore);
     }
 
+    // 테스트 참여
+    public TestStartResponseDto testStart(Long testId) {
+        Tester tester = findTesterById(testId);
+        return new TestStartResponseDto(tester);
+    }
+
     // 현재 로그인한 회원 정보 가져오기
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -78,4 +86,6 @@ public class TestParticipateService {
                 () -> new IllegalArgumentException("해당 테스트를 찾을 수 없습니다.")
         );
     }
+
+
 }

@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor
 public class TestsResponseDto {
+    private Long testId;
     private String username;
     private String title;
     private String image;
@@ -24,6 +25,7 @@ public class TestsResponseDto {
     private LocalDateTime modifiedAt;
 
     public TestsResponseDto(Tester tester) {
+        this.testId = tester.getId();
         this.username = tester.getUser().getUsername();
         this.title = tester.getTitle();
         this.image = tester.getImage();
