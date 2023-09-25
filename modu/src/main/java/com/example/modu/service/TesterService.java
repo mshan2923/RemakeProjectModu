@@ -76,7 +76,7 @@ public class TesterService {
     // 테스트 조회
     public List<TestsResponseDto> getAllTests(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Tester> testers = testerRepository.findAll(pageable);
+        Page<Tester> testers = testerRepository.findAllByOrderByParticipatesDesc(pageable);
         return testers.stream().map(TestsResponseDto::new).collect(Collectors.toList());
     }
 

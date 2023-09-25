@@ -14,4 +14,6 @@ public interface TesterRepository extends JpaRepository<Tester, Long> {
     List<Tester> findAllByUser(User user);
     Page<Tester> findAllByCategory(String category, Pageable pageable);
 
+    Page<Tester> findAllByOrderByParticipatesDesc(Pageable pageable);
+
 }
