@@ -9,5 +9,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ChoiceDto {
     private String content;
-    private boolean isCorrect;
+    private boolean correct;
 }
