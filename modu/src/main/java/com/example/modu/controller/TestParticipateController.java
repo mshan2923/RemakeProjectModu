@@ -19,7 +19,8 @@ public class TestParticipateController {
 
     // 테스트 완료
     @PostMapping("/participate/{testId}")
-    public ResultResponseDto participate(@PathVariable Long testId, @RequestBody ParticipateRequestDto dto) {
+    public ResultResponseDto participate(@PathVariable Long testId,
+                                         @RequestBody ParticipateRequestDto dto) {
         return testParticipateService.participateTest(testId, dto);
     }
 

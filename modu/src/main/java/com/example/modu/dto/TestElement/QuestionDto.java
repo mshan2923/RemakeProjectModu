@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter
-@Setter
 @NoArgsConstructor
 public class QuestionDto {
     private String title;
