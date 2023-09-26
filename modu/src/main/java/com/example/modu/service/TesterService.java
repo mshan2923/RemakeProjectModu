@@ -39,7 +39,7 @@ public class TesterService {
 
         }
 
-        User currentUser = getCurrentUser();// ======== 지금은 첫 유저를 값을 넣음
+        User currentUser = getCurrentUser();
         if(currentUser==null){
             throw new IllegalStateException("로그인한 사용자만 테스트를 작성할 수 있습니다.");
         }

@@ -87,10 +87,10 @@ public class UserController {
     }
     
     
-    @GetMapping("/join-test")
+    @GetMapping("/join")
     private ResponseEntity<List<TestsResponseDto>> joinTests(@AuthenticationPrincipal User user)
     {
         return userService.getJoinTests(user);
-    }//===== 명세서에 없음
+    }
 
 }

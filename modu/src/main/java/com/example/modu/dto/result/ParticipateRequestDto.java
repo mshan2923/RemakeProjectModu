@@ -9,7 +9,5 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class ParticipateRequestDto {
-    private Long userId;
-    private Long testId;
     private List<Long> userChoices;
 }

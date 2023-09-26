@@ -28,8 +28,12 @@ public class TestParticipateService {
     private final UserRepository userRepository;
     private final UserTestResultRepository userTestResultRepository;
 
-    public ResultResponseDto participateTest(Long testId, ParticipateRequestDto dto) {
-        User currentUser = getCurrentUser();
+    public ResultResponseDto participateTest(Long testId, ParticipateRequestDto dto , User user) {
+        //User currentUser = getCurrentUser();
+
+        if (user == null)
+            throw new IllegalArgumentException("인증 되지 않은 유저");
+
         Tester tester = findTesterById(testId);
 
         int userScore = 0;
@@ -49,7 +53,7 @@ public class TestParticipateService {
 
         System.out.println(userScore);
 
-        UserTestResult userTestResult = new UserTestResult(currentUser, userScore, tester);
+        UserTestResult userTestResult = new UserTestResult(user, userScore, tester);
 
         tester.increaseParticipates();
 
