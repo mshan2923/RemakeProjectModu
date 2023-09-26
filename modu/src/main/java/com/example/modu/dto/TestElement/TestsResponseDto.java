@@ -21,8 +21,8 @@ public class TestsResponseDto {
     private int likes;
     private int participates;
     private String category;
-    private List<CommentResponseDto> comments;
-    private List<QuestionResponseDto> questions;
+    //private List<CommentResponseDto> comments;
+    //private List<QuestionResponseDto> questions;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
@@ -37,8 +37,6 @@ public class TestsResponseDto {
         this.category = tester.getCategory();
         this.createdAt = tester.getCreatedAt();
         this.modifiedAt = tester.getModifiedAt();
-        this.questions = tester.getQuestions().stream().map(QuestionResponseDto::new).collect(Collectors.toList());
-        this.comments = tester.getComments().stream().map(CommentResponseDto::new).collect(Collectors.toList());
     }
 
 }
