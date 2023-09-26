@@ -1,10 +1,7 @@
 package com.example.modu.controller;
 
 import com.example.modu.dto.TestElement.TestsResponseDto;
-import com.example.modu.dto.user.LoginRequestDto;
-import com.example.modu.dto.user.SignupRequestDto;
-import com.example.modu.dto.user.StatusResponseDto;
-import com.example.modu.dto.user.UserUpdateRequestDto;
+import com.example.modu.dto.user.*;
 import com.example.modu.entity.User;
 import com.example.modu.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -71,14 +68,12 @@ public class UserController {
         return userService.login(login);
     }*///Security 가 처리
 
-    /*
-    @GetMapping("/mypage") //단순 페이지 이동이라서 클라가 처리?
-    private String myPage(@Valid @AuthenticationPrincipal User user, BindingResult bindingResult)
+
+    @GetMapping("/mypage") //단순 페이지 이동이 아닌 초기 로드시 정보
+    private ResponseEntity<UserDataResponse> myPage(@AuthenticationPrincipal User user)
     {
-        if (bindingResult.hasErrors())
-            return null;
         return userService.myPage(user);
-    }*/
+    }
 
     @GetMapping("/tests")
     private ResponseEntity<List<TestsResponseDto>> makedTests(@AuthenticationPrincipal User user)

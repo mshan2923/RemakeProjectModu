@@ -1,6 +1,8 @@
 package com.example.modu.service;
 
 import com.example.modu.dto.TestElement.ChoiceDto;
+import com.example.modu.dto.TestElement.QuestionDto;
+import com.example.modu.dto.TestElement.TestProcessResponseDto;
 import com.example.modu.dto.result.ParticipateRequestDto;
 import com.example.modu.dto.result.ResultResponseDto;
 import com.example.modu.entity.TestElement.Choice;
@@ -11,6 +13,7 @@ import com.example.modu.entity.User;
 import com.example.modu.repository.*;
 import jakarta.servlet.http.Part;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,11 +40,13 @@ public class TestParticipateService {
         Tester tester = findTesterById(testId);
 
         int userScore = 0;
+        int questionCount = 0;
         for(Long choiceId : dto.getUserChoices()){
             Choice choice = choiceRepository.findById(choiceId).orElseThrow(()->new IllegalArgumentException("해당 번호의 보기가 없습니다."));
             if(choice.isCorrect()){
                 userScore ++;
             }
+            questionCount++;
         }
 
         /*try{
@@ -59,7 +64,7 @@ public class TestParticipateService {
 
         userTestResultRepository.save(userTestResult);
 
-        return new ResultResponseDto(userScore);
+        return new ResultResponseDto(userScore, questionCount, user.getNickname());
     }
 
     // 현재 로그인한 회원 정보 가져오기
@@ -81,5 +86,14 @@ public class TestParticipateService {
         return testerRepository.findById(testId).orElseThrow(
                 () -> new IllegalArgumentException("해당 테스트를 찾을 수 없습니다.")
         );
+    }
+
+
+    public ResponseEntity<TestProcessResponseDto> getQuestions(Long testId)
+    {
+        Tester target = testerRepository.findById(testId).orElseThrow(
+                () -> new IllegalArgumentException("해당 테스트를 찾을 수 없습니다."));
+
+        return ResponseEntity.ok(new TestProcessResponseDto(target.getQuestions().stream().map(QuestionDto::new).toList()));
     }
 }

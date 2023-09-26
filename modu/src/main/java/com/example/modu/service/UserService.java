@@ -1,10 +1,7 @@
 package com.example.modu.service;
 
 import com.example.modu.dto.TestElement.TestsResponseDto;
-import com.example.modu.dto.user.LoginRequestDto;
-import com.example.modu.dto.user.SignupRequestDto;
-import com.example.modu.dto.user.StatusResponseDto;
-import com.example.modu.dto.user.UserUpdateRequestDto;
+import com.example.modu.dto.user.*;
 import com.example.modu.entity.TestElement.Tester;
 import com.example.modu.entity.TestElement.UserTestResult;
 import com.example.modu.entity.User;
@@ -73,11 +70,11 @@ public class UserService {
     }
     */
 
-    public String myPage(User user)
+    public ResponseEntity<UserDataResponse> myPage(User user)
     {
         if (user == null)
             throw new IllegalArgumentException("인증 되지 않은 유저");
-        return "mypageForm";
+        return ResponseEntity.ok(new UserDataResponse(user.getId(), user.getNickname()));
     }
 
     public  ResponseEntity<List<TestsResponseDto>> makedTests(User user)

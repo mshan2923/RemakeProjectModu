@@ -8,8 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResultResponseDto {
     private int score;
+    private int maxScore;
+    private String nickname;
 
-    public ResultResponseDto(int score) {
+    public ResultResponseDto(int score, int maxScore, String nickname) {
         this.score = score;
+        this.maxScore = maxScore;
+        this.nickname = nickname;
     }
 }
